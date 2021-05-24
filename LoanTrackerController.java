@@ -3,6 +3,7 @@ package com.example.homeloan.layer5;
 
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.homeloan.layer2.Document;
 import com.example.homeloan.layer2.LoanTracker;
@@ -19,8 +21,8 @@ import com.example.homeloan.layer3.DocumentRepo;
 import com.example.homeloan.layer4.LoanTrackerService;
 import com.example.homeloan.layer4.exceptions.LoanTrackerAlreadyExsitException;
 import com.example.homeloan.layer4.exceptions.LoanTrackerNotFoundException;
-import com.example.homeloan.layer4.exceptions.UserNotFoundException;
 
+@RestController
 public class LoanTrackerController {
 
 	@Autowired
@@ -50,7 +52,7 @@ public class LoanTrackerController {
 	@GetMapping(path="/getLoanTrackers")
 	@ResponseBody
 	public Set<LoanTracker> getAllLoanTrackers() {
-		System.out.println("Department Controller....Understanding client and talking to service layer...");
+		System.out.println("LoanTracker Controller....Understanding client and talking to service layer...");
 		Set<LoanTracker> loanTrackerSet = loanTrackerServ.findLoanTrackersService();
 		
 		return loanTrackerSet;
@@ -58,7 +60,7 @@ public class LoanTrackerController {
 	}
 
 	@PostMapping(path="/addLoanTracker")
-	public String addUserRegistration(@RequestBody LoanTracker loanTracker) {
+	public String addLoanTracker(@RequestBody LoanTracker loanTracker) {
 		System.out.println(" LoanTracker Controller....Understanding client and talking to service layer...");
 		LoanTracker loan=new LoanTracker();
 		loan.setAccNo(loanTracker.getAccNo());
@@ -101,7 +103,7 @@ public class LoanTrackerController {
 		
 	}
 	@DeleteMapping(path="/deleteLoanTracker")
-	public String removeDepartment(@RequestBody LoanTracker loanTracker)throws UserNotFoundException {
+	public String removeLoanTracker(@RequestBody LoanTracker loanTracker)throws LoanTrackerNotFoundException {
 		System.out.println("LoanTracker Controller....Understanding client and talking to service layer...");
 		 String stmsg = null;
 		try {
